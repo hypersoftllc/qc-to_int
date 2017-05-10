@@ -2,6 +2,9 @@
 
 A simple JavaScript utility to convert various values to an integer.
 
+[![Build Status](https://travis-ci.org/hypersoftllc/qc-to_int.svg?branch=master)](https://travis-ci.org/hypersoftllc/qc-to_int)
+
+
 **What it does that `parseInt` doesn't**
 
 * Allow a default value to be set instead of returning `NaN`.
