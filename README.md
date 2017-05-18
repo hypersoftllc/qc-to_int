@@ -40,3 +40,7 @@ toInt(NaN);            // `null`
 toInt(null);           // `null`
 toInt(undefined);      // `null`
 ```
+
+
+[travis-svg]: https://travis-ci.org/hypersoftllc/qc-to_int.svg?branch=master
+[travis-url]: https://travis-ci.org/hypersoftllc/qc-to_int
