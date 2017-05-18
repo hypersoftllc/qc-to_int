@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/hypersoftllc/qc-to_int.svg?branch=master)](https://travis-ci.org/hypersoftllc/qc-to_int)
 [![License][license-image]][license-url]
+[![Downloads][downloads-image]][downloads-url]
 
 A simple JavaScript utility to convert various values to an integer.
 
@@ -43,6 +44,8 @@ toInt(undefined);      // `null`
 ```
 
 
+[downloads-image]: http://img.shields.io/npm/dm/qc-to_int.svg
+[downloads-url]: http://npm-stat.com/charts.html?package=qc-to_int
 [license-image]: http://img.shields.io/npm/l/qc-to_int.svg
 [license-url]: LICENSE
 [travis-svg]: https://travis-ci.org/hypersoftllc/qc-to_int.svg?branch=master
