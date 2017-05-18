@@ -1,6 +1,7 @@
 # qc-to_int
 
 [![Build Status](https://travis-ci.org/hypersoftllc/qc-to_int.svg?branch=master)](https://travis-ci.org/hypersoftllc/qc-to_int)
+[![Coverage Status][coverage-image]][coverage-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
@@ -46,6 +47,8 @@ toInt(undefined);      // `null`
 ```
 
 
+[coverage-image]: https://coveralls.io/repos/github/hypersoftllc/qc-to_int/badge.svg?branch=master
+[coverage-url]: https://coveralls.io/github/hypersoftllc/qc-to_int?branch=master
 [downloads-image]: http://img.shields.io/npm/dm/qc-to_int.svg
 [downloads-url]: http://npm-stat.com/charts.html?package=qc-to_int
 [license-image]: http://img.shields.io/npm/l/qc-to_int.svg
