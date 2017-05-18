@@ -1,6 +1,6 @@
 # qc-to_int
 
-[![Build Status](https://travis-ci.org/hypersoftllc/qc-to_int.svg?branch=master)](https://travis-ci.org/hypersoftllc/qc-to_int)
+[![Build Status][travis-svg]][travis-url]
 [![Coverage Status][coverage-image]][coverage-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
