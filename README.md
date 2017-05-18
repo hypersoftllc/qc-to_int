@@ -4,6 +4,8 @@
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
+[![npm badge][npm-badge-png]][package-url]
+
 A simple JavaScript utility to convert various values to an integer.
 
 **What it does that `parseInt` doesn't**
@@ -48,5 +50,7 @@ toInt(undefined);      // `null`
 [downloads-url]: http://npm-stat.com/charts.html?package=qc-to_int
 [license-image]: http://img.shields.io/npm/l/qc-to_int.svg
 [license-url]: LICENSE
+[package-url]: https://npmjs.org/package/qc-to_int
+[npm-badge-png]: https://nodei.co/npm/qc-to_int.png?downloads=true&stars=true
 [travis-svg]: https://travis-ci.org/hypersoftllc/qc-to_int.svg?branch=master
 [travis-url]: https://travis-ci.org/hypersoftllc/qc-to_int
