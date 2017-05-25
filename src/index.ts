@@ -3,8 +3,8 @@ import { toNum } from 'qc-to_num';
 
 // ==========================================================================
 /**
- * Attempts to convert an integer-like value to a JavaScript number.  `undefined`, `null`, and `NaN` return the default
- * value (`null` by default).
+ * Attempts to convert an integer-like value to a JavaScript number.
+ * `undefined`, `null`, and `NaN` return the default value (`null` by default).
  *
  * ```js
  * toInt(-1e4); // -10000
@@ -25,8 +25,8 @@ import { toNum } from 'qc-to_num';
  * toInt(NaN, { def: 0 }); // 0
  * ```
  *
- * NOTE: This behaves differently than `parseInt` with the same input for certain input especially strings and large
- * numbers.
+ * NOTE: This behaves differently than `parseInt` with the same input for
+ * certain input especially strings and large numbers.
  *
  * ```js
  * toInt(-Infinity);           // -Infinity
@@ -54,14 +54,16 @@ import { toNum } from 'qc-to_num';
  * parseInt(Infinity);         // NaN
  * ```
  *
- * @param {*} input - The integer-like value to be converted to a JavaScript number.  This may also be an object
- *   with a custom `valueOf` method that returns a number or parsible string.
+ * @param {*} input - The integer-like value to be converted to a JavaScript
+ *   number.  This may also be an object with a custom `valueOf` method that
+ *   returns a number or parsible string.
  * @param {Object} [opts] - The options to use when doing the conversion.
- * @param {*} [opts.def=null] - The default value to return if unable to convert.  This is allowed to be of any
- *   data type.
+ * @param {*} [opts.def=null] - The default value to return if unable to convert.
+ *   This is allowed to be of any data type.
  *
- * @returns {number|*} The input converted to an integer or the default value if unable to convert.  Note: a value
- *   of type number is not always returned when the default value is returned.
+ * @returns {number|*} The input converted to an integer or the default value if
+ *   unable to convert.  Note: a value of type number is not always returned when
+ *   the default value is returned.
  */
 function toInt(input?: any, opts?: { def?: any }): any {
   let options: { def?: any, exp?: any }, output: any;
