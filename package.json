@@ -58,6 +58,7 @@
     ]
   },
   "dependencies": {
+    "qc-round": "^0.0.5",
     "qc-to_num": "^0.0.1"
   },
   "devDependencies": {
