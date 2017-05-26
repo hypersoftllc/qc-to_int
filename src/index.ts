@@ -118,4 +118,4 @@ function toInt(input?: any, def?: any | { def?: any }): any {
 
 
 // ==========================================================================
-export { toInt, toInt as to_int };
+export { toInt };

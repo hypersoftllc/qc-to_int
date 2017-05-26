@@ -1,5 +1,5 @@
 
-import { to_int, toInt } from './index';
+import { toInt } from './index';
 
 describe('qc-to_int', () => {
 
@@ -1121,18 +1121,6 @@ describe('qc-to_int', () => {
 
       input = { valueOf: function () { return undefined; } };
       expect(toInt(input)).toBe(input);
-    });
-
-  });
-
-  describe('`to_int`', () => {
-
-    it('should be a function', () => {
-      expect(typeof to_int).toBe('function');
-    });
-
-    it('should be an alias of `toInt`', () => {
-      expect(to_int).toBe(toInt);
     });
 
   });
