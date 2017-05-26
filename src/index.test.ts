@@ -1,5 +1,5 @@
 
-import { to_int, toInt } from './index';
+import { toInt, toIntOrNull } from './index';
 
 describe('qc-to_int', () => {
 
@@ -9,71 +9,113 @@ describe('qc-to_int', () => {
       expect(typeof toInt).toBe('function');
     });
 
-    it('called with no arguments should return default default value', () => {
-      expect(toInt()).toBeNull();
+    it('called with no arguments should return `undefined`', () => {
+      expect(toInt()).toBeUndefined();
     });
 
-    it('called with `arguments` should return default default value', function () {
-      expect(toInt(arguments)).toBeNull();
+    it('called with `arguments` should return input value', function () {
+      expect(toInt(arguments)).toBe(arguments);
     });
 
     it('called with `arguments` and default value should return default value', function () {
       const input = arguments;
       let toValue: any;
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(NaN);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(NaN);
+
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(0);
 
       toValue = toInt(input, { def: 0 });
       expect(toValue).toBe(0);
 
+      toValue = toInt(input, 123456.7);
+      expect(toValue).toBe(123456.7);
+
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(123456.7);
+
+      toValue = toInt(input, '');
+      expect(toValue).toBe('');
 
       toValue = toInt(input, { def: '' });
       expect(toValue).toBe('');
 
+      toValue = toInt(input, false);
+      expect(toValue).toBe(false);
+
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(false);
+
+      toValue = toInt(input, null);
+      expect(toValue).toBeNull();
 
       toValue = toInt(input, { def: null });
       expect(toValue).toBeNull();
 
+      toValue = toInt(input, undefined);
+      expect(toValue).toBe(input);
+
       toValue = toInt(input, { def: undefined });
-      expect(toValue).toBeUndefined();
+      expect(toValue).toBe(input);
     });
 
-    it('called with `undefined` should return default default value', () => {
-      expect(toInt(undefined)).toBeNull();
+    it('called with `undefined` should return input value', () => {
+      expect(toInt(undefined)).toBeUndefined();
     });
 
     it('called with `undefined` and default value should return default value', () => {
       const input = undefined;
       let toValue: any;
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(NaN);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(NaN);
+
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(0);
 
       toValue = toInt(input, { def: 0 });
       expect(toValue).toBe(0);
 
+      toValue = toInt(input, 123456.7);
+      expect(toValue).toBe(123456.7);
+
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(123456.7);
+
+      toValue = toInt(input, '');
+      expect(toValue).toBe('');
 
       toValue = toInt(input, { def: '' });
       expect(toValue).toBe('');
 
+      toValue = toInt(input, false);
+      expect(toValue).toBe(false);
+
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(false);
+
+      toValue = toInt(input, null);
+      expect(toValue).toBeNull();
 
       toValue = toInt(input, { def: null });
       expect(toValue).toBeNull();
 
+      toValue = toInt(input, undefined);
+      expect(toValue).toBe(input);
+
       toValue = toInt(input, { def: undefined });
-      expect(toValue).toBeUndefined();
+      expect(toValue).toBe(input);
     });
 
-    it('called with `null` should return default default value', () => {
+    it('called with `null` should return input value', () => {
       expect(toInt(null)).toBeNull();
     });
 
@@ -81,146 +123,251 @@ describe('qc-to_int', () => {
       const input = null;
       let toValue: any;
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(NaN);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(NaN);
+
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(0);
 
       toValue = toInt(input, { def: 0 });
       expect(toValue).toBe(0);
 
+      toValue = toInt(input, 123456.7);
+      expect(toValue).toBe(123456.7);
+
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(123456.7);
+
+      toValue = toInt(input, '');
+      expect(toValue).toBe('');
 
       toValue = toInt(input, { def: '' });
       expect(toValue).toBe('');
 
+      toValue = toInt(input, false);
+      expect(toValue).toBe(false);
+
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(false);
+
+      toValue = toInt(input, null);
+      expect(toValue).toBeNull();
 
       toValue = toInt(input, { def: null });
       expect(toValue).toBeNull();
 
+      toValue = toInt(input, undefined);
+      expect(toValue).toBe(input);
+
       toValue = toInt(input, { def: undefined });
-      expect(toValue).toBeUndefined();
+      expect(toValue).toBe(input);
     });
 
-    it('called with `NaN` should return default default value', () => {
-      expect(toInt(NaN)).toBeNull();
+    it('called with `NaN` should return input value', () => {
+      expect(toInt(NaN)).toEqual(NaN);
     });
 
     it('called with `NaN` and default value should return default value', () => {
       const input = NaN;
       let toValue: any;
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(NaN);
+
       toValue = toInt(input, { def: NaN });
-      expect(toValue).toBeNaN();
+      expect(toValue).toEqual(NaN);
+
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(0);
 
       toValue = toInt(input, { def: 0 });
       expect(toValue).toBe(0);
 
+      toValue = toInt(input, 123456.7);
+      expect(toValue).toBe(123456.7);
+
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(123456.7);
+
+      toValue = toInt(input, '');
+      expect(toValue).toBe('');
 
       toValue = toInt(input, { def: '' });
       expect(toValue).toBe('');
 
+      toValue = toInt(input, false);
+      expect(toValue).toBe(false);
+
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(false);
+
+      toValue = toInt(input, null);
+      expect(toValue).toBeNull();
 
       toValue = toInt(input, { def: null });
       expect(toValue).toBeNull();
 
+      toValue = toInt(input, undefined);
+      expect(toValue).toEqual(input);
+
       toValue = toInt(input, { def: undefined });
-      expect(toValue).toBeUndefined();
+      expect(toValue).toEqual(input);
     });
 
-    it('called with `"NaN"` should return default default value', () => {
-      expect(toInt('NaN')).toBeNull();
+    it('called with `"NaN"` should return input value', () => {
+      expect(toInt('NaN')).toBe('NaN');
     });
 
     it('called with `"NaN"` and default value should return default value', () => {
       const input = 'NaN';
       let toValue: any;
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(NaN);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(NaN);
+
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(0);
 
       toValue = toInt(input, { def: 0 });
       expect(toValue).toBe(0);
 
+      toValue = toInt(input, 123456.7);
+      expect(toValue).toBe(123456.7);
+
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(123456.7);
+
+      toValue = toInt(input, '');
+      expect(toValue).toBe('');
 
       toValue = toInt(input, { def: '' });
       expect(toValue).toBe('');
 
+      toValue = toInt(input, false);
+      expect(toValue).toBe(false);
+
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(false);
+
+      toValue = toInt(input, null);
+      expect(toValue).toBeNull();
 
       toValue = toInt(input, { def: null });
       expect(toValue).toBeNull();
 
+      toValue = toInt(input, undefined);
+      expect(toValue).toBe(input);
+
       toValue = toInt(input, { def: undefined });
-      expect(toValue).toBeUndefined();
+      expect(toValue).toBe(input);
     });
 
-    it('called with `false` should return default default value', () => {
-      expect(toInt(false)).toBeNull();
+    it('called with `false` should return input value', () => {
+      expect(toInt(false)).toBe(false);
     });
 
     it('called with `false` and default value should return default value', () => {
       const input = false;
       let toValue: any;
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(NaN);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(NaN);
+
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(0);
 
       toValue = toInt(input, { def: 0 });
       expect(toValue).toBe(0);
 
+      toValue = toInt(input, 123456.7);
+      expect(toValue).toBe(123456.7);
+
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(123456.7);
+
+      toValue = toInt(input, '');
+      expect(toValue).toBe('');
 
       toValue = toInt(input, { def: '' });
       expect(toValue).toBe('');
 
+      toValue = toInt(input, false);
+      expect(toValue).toBe(false);
+
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(false);
+
+      toValue = toInt(input, null);
+      expect(toValue).toBeNull();
 
       toValue = toInt(input, { def: null });
       expect(toValue).toBeNull();
 
+      toValue = toInt(input, undefined);
+      expect(toValue).toBe(input);
+
       toValue = toInt(input, { def: undefined });
-      expect(toValue).toBeUndefined();
+      expect(toValue).toBe(input);
     });
 
-    it('called with `true` should return default default value', () => {
-      expect(toInt(true)).toBeNull();
+    it('called with `true` should return input value', () => {
+      expect(toInt(true)).toBe(true);
     });
 
     it('called with `true` and default value should return default value', () => {
       const input = true;
       let toValue: any;
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(NaN);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(NaN);
+
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(0);
 
       toValue = toInt(input, { def: 0 });
       expect(toValue).toBe(0);
 
+      toValue = toInt(input, 123456.7);
+      expect(toValue).toBe(123456.7);
+
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(123456.7);
+
+      toValue = toInt(input, '');
+      expect(toValue).toBe('');
 
       toValue = toInt(input, { def: '' });
       expect(toValue).toBe('');
 
+      toValue = toInt(input, false);
+      expect(toValue).toBe(false);
+
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(false);
+
+      toValue = toInt(input, null);
+      expect(toValue).toBeNull();
 
       toValue = toInt(input, { def: null });
       expect(toValue).toBeNull();
 
+      toValue = toInt(input, undefined);
+      expect(toValue).toBe(input);
+
       toValue = toInt(input, { def: undefined });
-      expect(toValue).toBeUndefined();
+      expect(toValue).toBe(input);
     });
 
     it('called with `-Infinity` should return `-Infinity`', () => {
@@ -230,22 +377,43 @@ describe('qc-to_int', () => {
       toValue = toInt(input);
       expect(toValue).toBe(-Infinity);
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(-Infinity);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(-Infinity);
 
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(-Infinity);
+
       toValue = toInt(input, { def: 0 });
+      expect(toValue).toBe(-Infinity);
+
+      toValue = toInt(input, 123456.7);
       expect(toValue).toBe(-Infinity);
 
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(-Infinity);
 
+      toValue = toInt(input, '');
+      expect(toValue).toBe(-Infinity);
+
       toValue = toInt(input, { def: '' });
+      expect(toValue).toBe(-Infinity);
+
+      toValue = toInt(input, false);
       expect(toValue).toBe(-Infinity);
 
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(-Infinity);
 
+      toValue = toInt(input, null);
+      expect(toValue).toBe(-Infinity);
+
       toValue = toInt(input, { def: null });
+      expect(toValue).toBe(-Infinity);
+
+      toValue = toInt(input, undefined);
       expect(toValue).toBe(-Infinity);
 
       toValue = toInt(input, { def: undefined });
@@ -259,22 +427,43 @@ describe('qc-to_int', () => {
       toValue = toInt(input);
       expect(toValue).toBe(-Infinity);
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(-Infinity);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(-Infinity);
 
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(-Infinity);
+
       toValue = toInt(input, { def: 0 });
+      expect(toValue).toBe(-Infinity);
+
+      toValue = toInt(input, 123456.7);
       expect(toValue).toBe(-Infinity);
 
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(-Infinity);
 
+      toValue = toInt(input, '');
+      expect(toValue).toBe(-Infinity);
+
       toValue = toInt(input, { def: '' });
+      expect(toValue).toBe(-Infinity);
+
+      toValue = toInt(input, false);
       expect(toValue).toBe(-Infinity);
 
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(-Infinity);
 
+      toValue = toInt(input, null);
+      expect(toValue).toBe(-Infinity);
+
       toValue = toInt(input, { def: null });
+      expect(toValue).toBe(-Infinity);
+
+      toValue = toInt(input, undefined);
       expect(toValue).toBe(-Infinity);
 
       toValue = toInt(input, { def: undefined });
@@ -288,22 +477,43 @@ describe('qc-to_int', () => {
       toValue = toInt(input);
       expect(toValue).toBe(-Number.POSITIVE_INFINITY);
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(-Number.POSITIVE_INFINITY);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(-Number.POSITIVE_INFINITY);
 
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(-Number.POSITIVE_INFINITY);
+
       toValue = toInt(input, { def: 0 });
+      expect(toValue).toBe(-Number.POSITIVE_INFINITY);
+
+      toValue = toInt(input, 123456.7);
       expect(toValue).toBe(-Number.POSITIVE_INFINITY);
 
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(-Number.POSITIVE_INFINITY);
 
+      toValue = toInt(input, '');
+      expect(toValue).toBe(-Number.POSITIVE_INFINITY);
+
       toValue = toInt(input, { def: '' });
+      expect(toValue).toBe(-Number.POSITIVE_INFINITY);
+
+      toValue = toInt(input, false);
       expect(toValue).toBe(-Number.POSITIVE_INFINITY);
 
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(-Number.POSITIVE_INFINITY);
 
+      toValue = toInt(input, null);
+      expect(toValue).toBe(-Number.POSITIVE_INFINITY);
+
       toValue = toInt(input, { def: null });
+      expect(toValue).toBe(-Number.POSITIVE_INFINITY);
+
+      toValue = toInt(input, undefined);
       expect(toValue).toBe(-Number.POSITIVE_INFINITY);
 
       toValue = toInt(input, { def: undefined });
@@ -317,22 +527,43 @@ describe('qc-to_int', () => {
       toValue = toInt(input);
       expect(toValue).toBe(Number.NEGATIVE_INFINITY);
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(Number.NEGATIVE_INFINITY);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(Number.NEGATIVE_INFINITY);
 
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(Number.NEGATIVE_INFINITY);
+
       toValue = toInt(input, { def: 0 });
+      expect(toValue).toBe(Number.NEGATIVE_INFINITY);
+
+      toValue = toInt(input, 123456.7);
       expect(toValue).toBe(Number.NEGATIVE_INFINITY);
 
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(Number.NEGATIVE_INFINITY);
 
+      toValue = toInt(input, '');
+      expect(toValue).toBe(Number.NEGATIVE_INFINITY);
+
       toValue = toInt(input, { def: '' });
+      expect(toValue).toBe(Number.NEGATIVE_INFINITY);
+
+      toValue = toInt(input, false);
       expect(toValue).toBe(Number.NEGATIVE_INFINITY);
 
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(Number.NEGATIVE_INFINITY);
 
+      toValue = toInt(input, null);
+      expect(toValue).toBe(Number.NEGATIVE_INFINITY);
+
       toValue = toInt(input, { def: null });
+      expect(toValue).toBe(Number.NEGATIVE_INFINITY);
+
+      toValue = toInt(input, undefined);
       expect(toValue).toBe(Number.NEGATIVE_INFINITY);
 
       toValue = toInt(input, { def: undefined });
@@ -394,22 +625,43 @@ describe('qc-to_int', () => {
       toValue = toInt(input);
       expect(toValue).toBe(Infinity);
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(Infinity);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(Infinity);
 
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(Infinity);
+
       toValue = toInt(input, { def: 0 });
+      expect(toValue).toBe(Infinity);
+
+      toValue = toInt(input, 123456.7);
       expect(toValue).toBe(Infinity);
 
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(Infinity);
 
+      toValue = toInt(input, '');
+      expect(toValue).toBe(Infinity);
+
       toValue = toInt(input, { def: '' });
+      expect(toValue).toBe(Infinity);
+
+      toValue = toInt(input, false);
       expect(toValue).toBe(Infinity);
 
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(Infinity);
 
+      toValue = toInt(input, null);
+      expect(toValue).toBe(Infinity);
+
       toValue = toInt(input, { def: null });
+      expect(toValue).toBe(Infinity);
+
+      toValue = toInt(input, undefined);
       expect(toValue).toBe(Infinity);
 
       toValue = toInt(input, { def: undefined });
@@ -423,22 +675,43 @@ describe('qc-to_int', () => {
       toValue = toInt(input);
       expect(toValue).toBe(Infinity);
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(Infinity);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(Infinity);
 
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(Infinity);
+
       toValue = toInt(input, { def: 0 });
+      expect(toValue).toBe(Infinity);
+
+      toValue = toInt(input, 123456.7);
       expect(toValue).toBe(Infinity);
 
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(Infinity);
 
+      toValue = toInt(input, '');
+      expect(toValue).toBe(Infinity);
+
       toValue = toInt(input, { def: '' });
+      expect(toValue).toBe(Infinity);
+
+      toValue = toInt(input, false);
       expect(toValue).toBe(Infinity);
 
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(Infinity);
 
+      toValue = toInt(input, null);
+      expect(toValue).toBe(Infinity);
+
       toValue = toInt(input, { def: null });
+      expect(toValue).toBe(Infinity);
+
+      toValue = toInt(input, undefined);
       expect(toValue).toBe(Infinity);
 
       toValue = toInt(input, { def: undefined });
@@ -452,29 +725,50 @@ describe('qc-to_int', () => {
       toValue = toInt(input);
       expect(toValue).toBe(Number.POSITIVE_INFINITY);
 
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(Number.POSITIVE_INFINITY);
+
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(Number.POSITIVE_INFINITY);
 
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(Number.POSITIVE_INFINITY);
+
       toValue = toInt(input, { def: 0 });
+      expect(toValue).toBe(Number.POSITIVE_INFINITY);
+
+      toValue = toInt(input, 123456.7);
       expect(toValue).toBe(Number.POSITIVE_INFINITY);
 
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(Number.POSITIVE_INFINITY);
 
+      toValue = toInt(input, '');
+      expect(toValue).toBe(Number.POSITIVE_INFINITY);
+
       toValue = toInt(input, { def: '' });
+      expect(toValue).toBe(Number.POSITIVE_INFINITY);
+
+      toValue = toInt(input, false);
       expect(toValue).toBe(Number.POSITIVE_INFINITY);
 
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(Number.POSITIVE_INFINITY);
 
+      toValue = toInt(input, null);
+      expect(toValue).toBe(Number.POSITIVE_INFINITY);
+
       toValue = toInt(input, { def: null });
+      expect(toValue).toBe(Number.POSITIVE_INFINITY);
+
+      toValue = toInt(input, undefined);
       expect(toValue).toBe(Number.POSITIVE_INFINITY);
 
       toValue = toInt(input, { def: undefined });
       expect(toValue).toBe(Number.POSITIVE_INFINITY);
     });
 
-    it('called with a number value should return number', () => {
+    it('called with a number value should return number rounded to nearest integer', () => {
       let toValue: any;
 
       toValue = toInt(-6.022e23);
@@ -520,7 +814,7 @@ describe('qc-to_int', () => {
       expect(toValue).toBe(602200000000000000000000);
     });
 
-    it('called with a `Number` instance should return number primitive', () => {
+    it('called with a `Number` instance should return number primitive rounded to nearest integer', () => {
       let toValue: any;
 
       toValue = toInt(new Number(-2.6));
@@ -539,8 +833,8 @@ describe('qc-to_int', () => {
       expect(toValue).toBe(3);
     });
 
-    it('called with parsible string value should return number', () => {
-      let toValue;
+    it('called with a parsible string value should return number rounded to nearest integer', () => {
+      let toValue: any;
 
       toValue = toInt('-6.022e23');
       expect(toValue).toBe(-602200000000000000000000);
@@ -591,35 +885,100 @@ describe('qc-to_int', () => {
       expect(toValue).toBe(602200000000000000000000);
     });
 
-    it('called with an unparsible string value should return default default value', () => {
-      expect(toInt('')).toBeNull();
-      expect(toInt('foo')).toBeNull();
+    it('called with an inconvertible value should return input value', function () {
+      let input: any;
+
+      input = arguments;
+      expect(toInt(input)).toBe(input);
+
+      input = [];
+      expect(toInt(input)).toBe(input);
+
+      input = ['not empty'];
+      expect(toInt(input)).toBe(input);
+
+      input = false;
+      expect(toInt(input)).toBe(input);
+
+      input = true;
+      expect(toInt(input)).toBe(input);
+
+      input = new Error('Help!');
+      expect(toInt(input)).toBe(input);
+
+      input = function () {};
+      expect(toInt(input)).toBe(input);
+
+      input = NaN;
+      expect(toInt(input)).toEqual(input);
+
+      input = {};
+      expect(toInt(input)).toBe(input);
+
+      input = { prop: 'not empty' };
+      expect(toInt(input)).toBe(input);
+
+      input = /regexp/;
+      expect(toInt(input)).toBe(input);
+
+      input = '';
+      expect(toInt(input)).toBe(input);
+
+      input = 'not empty';
+      expect(toInt(input)).toBe(input);
+
+      input = null;
+      expect(toInt(input)).toBe(input);
+
+      input = undefined;
+      expect(toInt(input)).toBe(input);
     });
 
-    it('called with an unparsible string value and default value should return default value', () => {
+    it('called with an inconvertible value and default value should return default value', () => {
       const input = 'foo';
       let toValue: any;
+
+      toValue = toInt(input, NaN);
+      expect(toValue).toEqual(NaN);
 
       toValue = toInt(input, { def: NaN });
       expect(toValue).toEqual(NaN);
 
+      toValue = toInt(input, 0);
+      expect(toValue).toBe(0);
+
       toValue = toInt(input, { def: 0 });
       expect(toValue).toBe(0);
+
+      toValue = toInt(input, 123456.7);
+      expect(toValue).toBe(123456.7);
 
       toValue = toInt(input, { def: 123456.7 });
       expect(toValue).toBe(123456.7);
 
+      toValue = toInt(input, '');
+      expect(toValue).toBe('');
+
       toValue = toInt(input, { def: '' });
       expect(toValue).toBe('');
+
+      toValue = toInt(input, false);
+      expect(toValue).toBe(false);
 
       toValue = toInt(input, { def: false });
       expect(toValue).toBe(false);
 
+      toValue = toInt(input, null);
+      expect(toValue).toBeNull();
+
       toValue = toInt(input, { def: null });
       expect(toValue).toBeNull();
 
+      toValue = toInt(input, undefined);
+      expect(toValue).toBe(input);
+
       toValue = toInt(input, { def: undefined });
-      expect(toValue).toBeUndefined();
+      expect(toValue).toBe(input);
     });
 
     it('called with an object implementing the `valueOf` method that returns a number value should return the number', () => {
@@ -715,16 +1074,82 @@ describe('qc-to_int', () => {
       expect(toValue).toBe(3);
     });
 
-  });
+    it('called with an object implementing the `valueOf` method that returns an inconvertible value should return input value', () => {
+      let input: { valueOf: () => any }, toValue: any;
 
-  describe('`to_int`', () => {
+      input = { valueOf: function () { return arguments; } };
+      expect(toInt(input)).toBe(input);
 
-    it('should be a function', () => {
-      expect(typeof to_int).toBe('function');
+      input = { valueOf: function () { return []; } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return ['not empty']; } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return false; } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return true; } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return new Error('Help!'); } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return function () {}; } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return NaN; } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return {}; } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return { prop: 'not empty' }; } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return /regexp/; } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return ''; } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return 'not empty'; } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return null; } };
+      expect(toInt(input)).toBe(input);
+
+      input = { valueOf: function () { return undefined; } };
+      expect(toInt(input)).toBe(input);
     });
 
-    it('should be an alias of `toInt`', () => {
-      expect(to_int).toBe(toInt);
+  });
+
+  describe('`toIntOrNull`', () => {
+
+    it('should be a function', () => {
+      expect(typeof toIntOrNull).toBe('function');
+    });
+
+    it('called with no arguments should return `null`', () => {
+      expect(toIntOrNull()).toBeNull();
+    });
+
+    it('called with inconvertible input should return `null`', function () {
+      expect(toIntOrNull(arguments)).toBeNull();
+      expect(toIntOrNull([])).toBeNull();
+      expect(toIntOrNull(['not empty'])).toBeNull();
+      expect(toIntOrNull(new Error('Help!'))).toBeNull();
+      expect(toIntOrNull(function () {})).toBeNull();
+      expect(toIntOrNull({})).toBeNull();
+      expect(toIntOrNull({ prop: 'not empty' })).toBeNull();
+      expect(toIntOrNull(null)).toBeNull();
+      expect(toIntOrNull(NaN)).toBeNull();
+      expect(toIntOrNull(Number.NaN)).toBeNull();
+      expect(toIntOrNull(/regexp/)).toBeNull();
+      expect(toIntOrNull('')).toBeNull();
+      expect(toIntOrNull('not empty')).toBeNull();
+      expect(toIntOrNull(undefined)).toBeNull();
     });
 
   });

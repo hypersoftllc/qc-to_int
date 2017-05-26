@@ -1,28 +1,53 @@
 
+import { round } from 'qc-round';
 import { toNum } from 'qc-to_num';
+
+const DEF = {};
+const DEF_ARG = { def: DEF };
 
 // ==========================================================================
 /**
- * Attempts to convert an integer-like value to a JavaScript number.
- * `undefined`, `null`, and `NaN` return the default value (`null` by default).
+ * Attempts to convert an integer-like value to a JavaScript number primitive.
+ *
+ * If the integer-like input cannot be converted to a number, then the default
+ * value is returned.  When the default value is undefined, then the input is
+ * returned.
+ *
+ * NOTE: This function behaves differently than the native `Number` constructor
+ * in several ways.
+ *
+ * 1) Won't return a `Number' instance with a type of `'object'` when used with
+ *    the new operator.
+ *
+ * 2) Won't return `NaN` when not convertible (unless you use `NaN` for the
+ *    default).
+ *
+ * 3) Correctly handles `-0` which returns `0' instead of `-0`.
+ *
+ * 4) Correctly handles `'-0'` which returns `0' instead of `-0`.
+ *
+ * 5) It automatically rounds to the nearest integer.
  *
  * ```js
- * toInt(-1e4); // -10000
- * toInt('-1e4'); // -10000
- * toInt("2"); // 2
- * toInt(2.6); // 3
- * toInt(1.2); // 1
- * toInt(1); // 1
- * toInt(-1); // -1
- * toInt(-2.6); // -3
- * toInt(6.022e23); // 602200000000000000000000
- * toInt('6.022e23'); // 602200000000000000000000
- * toInt(null); // null
- * toInt(undefined); // null
- * toInt(NaN); // null
- * toInt(null, { def: 0 }); // 0
- * toInt(undefined, { def: 0 }); // 0
- * toInt(NaN, { def: 0 }); // 0
+ * toInt(-1e4);                    // `-10000`
+ * toInt('-1e4');                  // `-10000`
+ * toInt("2");                     // `2`
+ * toInt(2.6);                     // `3`
+ * toInt(1.2);                     // `1`
+ * toInt(1);                       // `1`
+ * toInt(-1);                      // `-1`
+ * toInt(-2.6);                    // `-3`
+ * toInt(6.022e23);                // `602200000000000000000000`
+ * toInt('6.022e23');              // `602200000000000000000000`
+ * toInt(null);                    // `null`
+ * toInt(undefined);               // `undefined`
+ * toInt(NaN);                     // `NaN`
+ * toInt(null, 0);                 // `0`
+ * toInt(null, { def: 0 });        // `0`
+ * toInt(undefined, 0);            // `0`
+ * toInt(undefined, { def: 0 });   // `0`
+ * toInt(NaN, 0);                  // `0`
+ * toInt(NaN, { def: 0 });         // `0`
  * ```
  *
  * NOTE: This behaves differently than `parseInt` with the same input for
@@ -54,26 +79,51 @@ import { toNum } from 'qc-to_num';
  * parseInt(Infinity);         // NaN
  * ```
  *
- * @param {*} input - The integer-like value to be converted to a JavaScript
- *   number.  This may also be an object with a custom `valueOf` method that
- *   returns a number or parsible string.
- * @param {Object} [opts] - The options to use when doing the conversion.
- * @param {*} [opts.def=null] - The default value to return if unable to convert.
- *   This is allowed to be of any data type.
+ * @param {*=} input - The value to be converted to a JavaScript number
+ *   primitive rounded to the nearest integer.  This may also be an object with a
+ *   custom `valueOf` method that returns a number or parsible string.
+ * @param {*=|{ def=: *}} [def=undefined] - The default value to return if
+ *   unable to convert.  This is allowed to be of any data type.  This may also
+ *   be an object with a `def` property.  To return an object as a default value,
+ *   then wrap it in an object with a `def` property set to the object that is to
+ *   be used as the default value.  A default value resolving to `undefined`
+ *   means return the input when not convertible.
  *
  * @returns {number|*} The input converted to an integer or the default value if
  *   unable to convert.  Note: a value of type number is not always returned when
  *   the default value is returned.
  */
-function toInt(input?: any, opts?: { def?: any }): any {
-  let options: { def?: any, exp?: any }, output: any;
+function toInt(input?: any, def?: any | { def?: any }): any {
+  let output: any;
 
-  options = opts || {};
-  options.exp = 0;
-  output = toNum(input, options);
+  output = toNum(input, DEF_ARG);
+  if (output === DEF) {
+    if (typeof def == 'object' && def !== null) {
+      def = def.def;
+    }
+    else {
+      def = def;
+    }
+    if (def === undefined) {
+      def = input;
+    }
+
+    output = def;
+  }
+  else {
+    output = round(output, 0);
+  }
   return output;
 }
 
 
+/**
+ * Like `toInt` but returns `null` if input is not convertible to a number.
+ */
+function toIntOrNull(input?: any) {
+  return toInt(input, null);
+}
+
+
 // ==========================================================================
-export { toInt, toInt as to_int };
+export { toInt, toIntOrNull };
