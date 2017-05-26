@@ -35,16 +35,17 @@ npm install --save qc-to_int
 ```js
 import { toInt } from 'qc-to_int';
 
-toInt();               // `null`
-toInt('');             // `null`
+toInt();               // `undefined`
+toInt('');             // `''`
+toInt('', 0);          // `0`
 toInt('', { def: 0 }); // `0`
 toInt('+3.1459');      // 3
 toInt('1e4');          // 10000
 toInt('-2.6');         // -3
 toInt(-2.6);           // -3
-toInt(NaN);            // `null`
+toInt(NaN);            // `NaN`
 toInt(null);           // `null`
-toInt(undefined);      // `null`
+toInt(undefined);      // `undefined`
 ```
 
 
