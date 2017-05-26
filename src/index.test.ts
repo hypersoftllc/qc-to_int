@@ -1,5 +1,5 @@
 
-import { toInt } from './index';
+import { toInt, toIntOrNull } from './index';
 
 describe('qc-to_int', () => {
 
@@ -1121,6 +1121,35 @@ describe('qc-to_int', () => {
 
       input = { valueOf: function () { return undefined; } };
       expect(toInt(input)).toBe(input);
+    });
+
+  });
+
+  describe('`toIntOrNull`', () => {
+
+    it('should be a function', () => {
+      expect(typeof toIntOrNull).toBe('function');
+    });
+
+    it('called with no arguments should return `null`', () => {
+      expect(toIntOrNull()).toBeNull();
+    });
+
+    it('called with inconvertible input should return `null`', function () {
+      expect(toIntOrNull(arguments)).toBeNull();
+      expect(toIntOrNull([])).toBeNull();
+      expect(toIntOrNull(['not empty'])).toBeNull();
+      expect(toIntOrNull(new Error('Help!'))).toBeNull();
+      expect(toIntOrNull(function () {})).toBeNull();
+      expect(toIntOrNull({})).toBeNull();
+      expect(toIntOrNull({ prop: 'not empty' })).toBeNull();
+      expect(toIntOrNull(null)).toBeNull();
+      expect(toIntOrNull(NaN)).toBeNull();
+      expect(toIntOrNull(Number.NaN)).toBeNull();
+      expect(toIntOrNull(/regexp/)).toBeNull();
+      expect(toIntOrNull('')).toBeNull();
+      expect(toIntOrNull('not empty')).toBeNull();
+      expect(toIntOrNull(undefined)).toBeNull();
     });
 
   });

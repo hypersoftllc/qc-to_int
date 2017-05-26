@@ -117,5 +117,13 @@ function toInt(input?: any, def?: any | { def?: any }): any {
 }
 
 
+/**
+ * Like `toInt` but returns `null` if input is not convertible to a number.
+ */
+function toIntOrNull(input?: any) {
+  return toInt(input, null);
+}
+
+
 // ==========================================================================
-export { toInt };
+export { toInt, toIntOrNull };
