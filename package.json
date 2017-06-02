@@ -59,7 +59,7 @@
   },
   "dependencies": {
     "qc-round": "^0.0.6",
-    "qc-to_num": "^1.0.1"
+    "qc-to_num": "^1.0.2"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
